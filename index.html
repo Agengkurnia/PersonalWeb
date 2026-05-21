@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ageng Kurniawan Sugianto – Full Stack Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0e1a;
+      --bg2: #111827;
+      --card: #131c2e;
+      --border: #1e2d45;
+      --accent: #3b82f6;
+      --accent2: #8b5cf6;
+      --accent3: #06b6d4;
+      --green: #10b981;
+      --orange: #f59e0b;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --light: #94a3b8;
+      --radius: 14px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(10,14,26,0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-weight: 800; font-size: 1rem; color: var(--accent); letter-spacing: 2px; font-family: 'Fira Code', monospace; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--light); text-decoration: none; font-size: .875rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      background: var(--accent); color: #fff; padding: .45rem 1.2rem;
+      border-radius: 8px; font-size: .85rem; font-weight: 600;
+      text-decoration: none; transition: opacity .2s;
+    }
+    .nav-cta:hover { opacity: .85; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 6rem 2rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(59,130,246,.12) 0%, transparent 70%),
+                  radial-gradient(ellipse 50% 40% at 80% 80%, rgba(139,92,246,.08) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px; opacity: .25;
+    }
+    .hero-inner {
+      position: relative; z-index: 1;
+      max-width: 900px; width: 100%;
+      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.5rem;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(59,130,246,.1); border: 1px solid rgba(59,130,246,.3);
+      color: var(--accent); padding: .35rem 1rem; border-radius: 999px;
+      font-size: .8rem; font-weight: 600; letter-spacing: .5px;
+    }
+    .hero-badge span { width: 7px; height: 7px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+    .hero h1 { font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 800; line-height: 1.1; letter-spacing: -1px; }
+    .hero h1 .name-accent { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-title {
+      font-family: 'Fira Code', monospace; font-size: clamp(.9rem, 2vw, 1.1rem);
+      color: var(--accent3); font-weight: 500;
+    }
+    .hero-title .cursor { animation: blink 1s step-end infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .hero-desc { max-width: 600px; color: var(--light); font-size: 1rem; line-height: 1.8; }
+    .hero-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+    .hero-meta-item { display: flex; align-items: center; gap: .4rem; color: var(--muted); font-size: .85rem; }
+    .hero-meta-item i { color: var(--accent); }
+    .hero-meta-item a { color: var(--muted); text-decoration: none; }
+    .hero-meta-item a:hover { color: var(--accent); }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: .5rem; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff; padding: .75rem 2rem; border-radius: 10px;
+      font-weight: 600; font-size: .95rem; text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(59,130,246,.3);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(59,130,246,.4); }
+    .btn-outline {
+      border: 1px solid var(--border); color: var(--light);
+      padding: .75rem 2rem; border-radius: 10px;
+      font-weight: 600; font-size: .95rem; text-decoration: none;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .hero-stats { display: flex; gap: 2.5rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem; }
+    .stat { text-align: center; }
+    .stat-num { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-label { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-family: 'Fira Code', monospace; font-size: .8rem; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: .5rem; }
+    .section-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; margin-bottom: .75rem; }
+    .section-line { width: 50px; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 2px; margin-bottom: 3rem; }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .about-text p { color: var(--light); line-height: 1.9; margin-bottom: 1rem; }
+    .about-highlights { display: flex; flex-direction: column; gap: 1rem; }
+    .highlight-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.25rem 1.5rem;
+      display: flex; align-items: flex-start; gap: 1rem;
+      transition: border-color .2s, transform .2s;
+    }
+    .highlight-card:hover { border-color: var(--accent); transform: translateX(4px); }
+    .highlight-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .highlight-icon.blue { background: rgba(59,130,246,.15); color: var(--accent); }
+    .highlight-icon.purple { background: rgba(139,92,246,.15); color: var(--accent2); }
+    .highlight-icon.cyan { background: rgba(6,182,212,.15); color: var(--accent3); }
+    .highlight-icon.green { background: rgba(16,185,129,.15); color: var(--green); }
+    .highlight-content h4 { font-size: .9rem; font-weight: 600; margin-bottom: .2rem; }
+    .highlight-content p { font-size: .82rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--bg2); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .skill-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem;
+      transition: border-color .2s, transform .2s;
+    }
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .skill-card-header { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.25rem; }
+    .skill-card-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: .95rem; }
+    .skill-card-title { font-weight: 700; font-size: .95rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .tag {
+      background: rgba(255,255,255,.05); border: 1px solid var(--border);
+      color: var(--light); padding: .3rem .75rem; border-radius: 6px;
+      font-size: .78rem; font-weight: 500; font-family: 'Fira Code', monospace;
+      transition: background .2s, border-color .2s, color .2s;
+    }
+    .tag:hover { background: rgba(59,130,246,.1); border-color: var(--accent); color: var(--accent); }
+
+    /* ── EXPERIENCE ── */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--accent), var(--accent2), transparent); border-radius: 2px; }
+    .timeline-item { position: relative; margin-bottom: 2.5rem; }
+    .timeline-dot {
+      position: absolute; left: -2.45rem; top: .35rem;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--accent); border: 3px solid var(--bg);
+      box-shadow: 0 0 0 3px rgba(59,130,246,.3);
+    }
+    .exp-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.75rem;
+      transition: border-color .2s;
+    }
+    .exp-card:hover { border-color: rgba(59,130,246,.4); }
+    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: .5rem; margin-bottom: .75rem; }
+    .exp-company { font-size: .8rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: .25rem; }
+    .exp-role { font-size: 1.05rem; font-weight: 700; }
+    .exp-period {
+      background: rgba(59,130,246,.1); border: 1px solid rgba(59,130,246,.2);
+      color: var(--accent); padding: .25rem .75rem; border-radius: 6px;
+      font-size: .75rem; font-weight: 600; white-space: nowrap;
+    }
+    .exp-desc { color: var(--light); font-size: .88rem; line-height: 1.8; margin-top: .75rem; }
+    .exp-desc li { margin-bottom: .4rem; padding-left: 1rem; position: relative; list-style: none; }
+    .exp-desc li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); }
+
+    /* ── PROJECTS ── */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+    .project-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.75rem;
+      display: flex; flex-direction: column; gap: 1rem;
+      transition: transform .2s, border-color .2s;
+      position: relative;
+    }
+    .project-card:hover { transform: translateY(-4px); border-color: rgba(59,130,246,.3); }
+    .project-header { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+    .project-icon {
+      width: 42px; height: 42px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .project-company-badge {
+      border: 1px solid; border-radius: 6px;
+      padding: .25rem .75rem; font-size: .75rem; font-weight: 600;
+      letter-spacing: .3px;
+    }
+    .project-title { font-size: 1.05rem; font-weight: 700; line-height: 1.3; }
+    .project-desc { color: var(--light); font-size: .875rem; line-height: 1.8; flex: 1; }
+    .project-role {
+      display: flex; align-items: flex-start; gap: .6rem;
+      background: rgba(255,255,255,.03); border: 1px solid var(--border);
+      border-radius: 8px; padding: .75rem 1rem;
+      font-size: .82rem; color: var(--light); line-height: 1.6;
+    }
+    .project-role i { color: var(--accent); margin-top: .15rem; flex-shrink: 0; }
+    .project-role strong { color: var(--text); }
+    .project-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .project-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: .75rem; border-top: 1px solid var(--border);
+      flex-wrap: wrap; gap: .5rem;
+    }
+    .project-year { font-size: .78rem; color: var(--muted); display: flex; align-items: center; gap: .4rem; }
+    .project-year i { color: var(--accent); }
+    .project-type { font-size: .75rem; display: flex; align-items: center; gap: .35rem; }
+    .project-type.internal { color: var(--muted); }
+    .project-link {
+      font-size: .78rem; color: var(--accent); text-decoration: none;
+      display: flex; align-items: center; gap: .35rem; font-weight: 600;
+      transition: opacity .2s;
+    }
+    .project-link:hover { opacity: .75; }
+
+    /* ── ACHIEVEMENTS ── */
+    #achievements { background: var(--bg2); }
+    .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .achievement-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.75rem;
+      position: relative; overflow: hidden;
+      transition: transform .2s, border-color .2s;
+    }
+    .achievement-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+    .achievement-card:hover { transform: translateY(-4px); border-color: rgba(59,130,246,.3); }
+    .achievement-num { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: .5rem; }
+    .achievement-text { color: var(--light); font-size: .9rem; line-height: 1.7; }
+
+    /* ── EDUCATION ── */
+    .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .edu-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.75rem;
+      transition: border-color .2s, transform .2s;
+    }
+    .edu-card:hover { border-color: var(--accent2); transform: translateY(-3px); }
+    .edu-degree { font-size: 1rem; font-weight: 700; margin-bottom: .3rem; }
+    .edu-school { color: var(--accent); font-size: .85rem; font-weight: 600; margin-bottom: .5rem; }
+    .edu-meta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .edu-badge {
+      background: rgba(139,92,246,.1); border: 1px solid rgba(139,92,246,.2);
+      color: var(--accent2); padding: .2rem .65rem; border-radius: 6px;
+      font-size: .75rem; font-weight: 600;
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg2); }
+    .contact-wrapper {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 3rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+    }
+    .contact-info h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
+    .contact-info p { color: var(--light); line-height: 1.8; margin-bottom: 1.5rem; }
+    .contact-links { display: flex; flex-direction: column; gap: .75rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: .75rem;
+      color: var(--light); text-decoration: none; font-size: .9rem;
+      padding: .75rem 1rem; border-radius: 10px;
+      border: 1px solid var(--border);
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); background: rgba(59,130,246,.05); }
+    .contact-link i { width: 20px; text-align: center; color: var(--accent); }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: .4rem; }
+    .form-group label { font-size: .82rem; font-weight: 600; color: var(--light); }
+    .form-group input, .form-group textarea {
+      background: var(--bg); border: 1px solid var(--border);
+      color: var(--text); padding: .75rem 1rem; border-radius: 10px;
+      font-family: 'Inter', sans-serif; font-size: .9rem;
+      transition: border-color .2s; outline: none; resize: vertical;
+    }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea { min-height: 110px; }
+    .btn-send {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff; border: none; padding: .85rem; border-radius: 10px;
+      font-weight: 700; font-size: .95rem; cursor: pointer;
+      transition: opacity .2s, transform .2s;
+    }
+    .btn-send:hover { opacity: .9; transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted); font-size: .82rem;
+    }
+    footer span { color: var(--accent); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .contact-wrapper { grid-template-columns: 1fr; }
+      .hero-stats { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo">&lt;AKS /&gt;</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:agengkurniawan1@gmail.com" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span></span> Available for opportunities
+    </div>
+    <h1>
+      Hi, I'm <br/>
+      <span class="name-accent">Ageng Kurniawan</span><br/>
+      Sugianto
+    </h1>
+    <div class="hero-title">
+      &gt; Full Stack Developer &amp; IT Supervisor<span class="cursor">_</span>
+    </div>
+    <p class="hero-desc">
+      7+ years building scalable web applications across healthcare, manufacturing, and e-commerce industries.
+      Passionate about clean code, DevOps, and delivering high-performing digital solutions.
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><i class="fas fa-map-marker-alt"></i> Jakarta, Indonesia</div>
+      <div class="hero-meta-item"><i class="fas fa-envelope"></i>
+        <a href="mailto:agengkurniawan1@gmail.com">agengkurniawan1@gmail.com</a>
+      </div>
+      <div class="hero-meta-item"><i class="fas fa-circle" style="color:var(--green);font-size:.6rem"></i> Open to Work</div>
+    </div>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary"><i class="fas fa-paper-plane"></i> &nbsp;Get In Touch</a>
+      <a href="#experience" class="btn-outline"><i class="fas fa-briefcase"></i> &nbsp;View Experience</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">8+</div><div class="stat-label">Years Exp.</div></div>
+      <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Users Served</div></div>
+      <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Companies</div></div>
+      <div class="stat"><div class="stat-num">BA + Dev</div><div class="stat-label">Current Role</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">// about me</div>
+    <h2 class="section-title">Who I Am</h2>
+    <div class="section-line"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a <strong>Full-Stack Web Developer</strong> with over 7 years of hands-on experience designing, building, and maintaining enterprise-grade web applications. My journey spans across diverse industries — from <strong>healthcare and manufacturing</strong> at Kalbe Nutritionals to <strong>e-commerce</strong> at Klik Indomaret and automotive at AGIT.
+        </p>
+        <p>
+          Currently serving as a <strong>Web Developer Supervisor & IT Developer Leader</strong> at Kalbe Nutritionals (PT. Sanghiang Perkasa), I lead cross-functional teams to deliver scalable solutions for Supply Chain, Laboratory, and Quality management systems.
+        </p>
+        <p>
+          I thrive in agile environments and bring a strong foundation in both frontend and backend development, complemented by solid DevOps practices — from containerization with Docker to CI/CD pipelines using Jenkins and Octopus.
+        </p>
+      </div>
+      <div class="about-highlights">
+        <div class="highlight-card">
+          <div class="highlight-icon blue"><i class="fas fa-layer-group"></i></div>
+          <div class="highlight-content">
+            <h4>Full-Stack Expertise</h4>
+            <p>Proficient in both frontend (HTML, CSS, Bootstrap, jQuery) and backend (ASP.NET C#, Laravel, CodeIgniter) development.</p>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon purple"><i class="fas fa-users-cog"></i></div>
+          <div class="highlight-content">
+            <h4>Leadership & Supervision</h4>
+            <p>Led development teams as IT Supervisor and Developer Leader, aligning software quality with business goals.</p>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon cyan"><i class="fas fa-server"></i></div>
+          <div class="highlight-content">
+            <h4>DevOps & Infrastructure</h4>
+            <p>Experienced with Ubuntu Server, Docker, NGINX, Apache, Jenkins, and Octopus for deployment pipelines.</p>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon green"><i class="fas fa-database"></i></div>
+          <div class="highlight-content">
+            <h4>Multi-Database Proficiency</h4>
+            <p>Hands-on experience with MySQL, PostgreSQL, SQL Server, and Oracle across various enterprise projects.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label">// technical skills</div>
+    <h2 class="section-title">Tech Stack</h2>
+    <div class="section-line"></div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="skill-card-icon" style="background:rgba(59,130,246,.15);color:var(--accent)"><i class="fas fa-paint-brush"></i></div>
+          <div class="skill-card-title">Frontend</div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
+          <span class="tag">Bootstrap</span>
+          <span class="tag">jQuery</span>
+          <span class="tag">JavaScript</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="skill-card-icon" style="background:rgba(139,92,246,.15);color:var(--accent2)"><i class="fas fa-code"></i></div>
+          <div class="skill-card-title">Backend</div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag">ASP.NET (C#)</span>
+          <span class="tag">.NET Core</span>
+          <span class="tag">PHP</span>
+          <span class="tag">Laravel</span>
+          <span class="tag">CodeIgniter</span>
+          <span class="tag">RESTful API</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="skill-card-icon" style="background:rgba(6,182,212,.15);color:var(--accent3)"><i class="fas fa-database"></i></div>
+          <div class="skill-card-title">Database</div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag">MySQL</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">SQL Server</span>
+          <span class="tag">Oracle DB</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="skill-card-icon" style="background:rgba(16,185,129,.15);color:var(--green)"><i class="fas fa-server"></i></div>
+          <div class="skill-card-title">Infrastructure</div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag">Ubuntu Server</span>
+          <span class="tag">Docker</span>
+          <span class="tag">NGINX</span>
+          <span class="tag">Apache</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="skill-card-icon" style="background:rgba(245,158,11,.15);color:var(--orange)"><i class="fas fa-tools"></i></div>
+          <div class="skill-card-title">Tools & DevOps</div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag">Git</span>
+          <span class="tag">Jenkins</span>
+          <span class="tag">Octopus</span>
+          <span class="tag">Notion</span>
+          <span class="tag">Gemini AI</span>
+          <span class="tag">Cursor</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="skill-card-icon" style="background:rgba(16,185,129,.15);color:var(--green)"><i class="fas fa-chart-line"></i></div>
+          <div class="skill-card-title">Business Analysis</div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag">BRD / FRD</span>
+          <span class="tag">Requirements Gathering</span>
+          <span class="tag">Process Mapping</span>
+          <span class="tag">Stakeholder Mgmt</span>
+          <span class="tag">User Stories</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="skill-card-icon" style="background:rgba(239,68,68,.15);color:#ef4444"><i class="fas fa-globe"></i></div>
+          <div class="skill-card-title">Languages</div>
+        </div>
+        <div class="skill-tags">
+          <span class="tag">Bahasa Indonesia 🇮🇩</span>
+          <span class="tag">English (Technical)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ── -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">// work history</div>
+    <h2 class="section-title">Experience</h2>
+    <div class="section-line"></div>
+    <div class="timeline">
+
+      <!-- Current 2026 -->
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:var(--green);box-shadow:0 0 0 3px rgba(16,185,129,.3);width:18px;height:18px;left:-2.6rem"></div>
+        <div class="exp-card" style="border-color:rgba(16,185,129,.3);position:relative;overflow:hidden">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),var(--accent3))"></div>
+          <div class="exp-header">
+            <div>
+              <div class="exp-company" style="color:var(--green)">Current Role · 2026</div>
+              <div class="exp-role">Business Analyst &amp; Developer</div>
+            </div>
+            <div class="exp-period" style="background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.3);color:var(--green);display:flex;align-items:center;gap:.4rem">
+              <span style="width:7px;height:7px;background:var(--green);border-radius:50%;display:inline-block;animation:pulse 2s infinite"></span>
+              2026 – Present
+            </div>
+          </div>
+          <ul class="exp-desc">
+            <li>Bridging the gap between business needs and technical solutions as a <strong>Business Analyst & Developer</strong> — gathering requirements, analyzing processes, and translating them into actionable development plans.</li>
+            <li>Conducting stakeholder interviews, creating BRD/FRD documentation, and defining system specifications to guide development teams.</li>
+            <li>Actively contributing to development alongside analytical responsibilities, ensuring solutions are both technically sound and business-aligned.</li>
+          </ul>
+          <div style="margin-top:.75rem;display:flex;gap:.5rem;flex-wrap:wrap">
+            <span class="tag">Business Analysis</span><span class="tag">BRD / FRD</span><span class="tag">.NET Core</span><span class="tag">Oracle DB</span><span class="tag">PostgreSQL</span><span class="tag">ASP.NET C#</span><span class="tag">Stakeholder Mgmt</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kalbe 2024 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-company">Kalbe Nutritionals (PT. Sanghiang Perkasa) · Jakarta</div>
+              <div class="exp-role">Web Developer Supervisor &amp; IT Developer Leader</div>
+            </div>
+            <div class="exp-period">Jan 2024 – Dec 2025</div>
+          </div>
+          <ul class="exp-desc">
+            <li>Spearheading development and maintenance of enterprise-level web applications ensuring scalability and performance across Supply Chain, Laboratory, and Quality business units.</li>
+            <li>Leading cross-functional teams to align software quality with development standards and business requirements.</li>
+            <li>Architecting solutions for the Manufacture section covering end-to-end workflows from production to quality assurance.</li>
+          </ul>
+          <div style="margin-top:.75rem;display:flex;gap:.5rem;flex-wrap:wrap">
+            <span class="tag">ASP.NET C#</span><span class="tag">SQL Server</span><span class="tag">Docker</span><span class="tag">Jenkins</span><span class="tag">Octopus</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kalbe 2020 -->
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:var(--accent2);box-shadow:0 0 0 3px rgba(139,92,246,.3)"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-company">Kalbe Nutritionals (PT. Sanghiang Perkasa) · Jakarta</div>
+              <div class="exp-role">Web Developer (C#, ASP.NET) IT Supervisor</div>
+            </div>
+            <div class="exp-period">Aug 2020 – Dec 2023</div>
+          </div>
+          <ul class="exp-desc">
+            <li>Maintained and enhanced web applications for Supply Chain, Laboratory, and Quality departments.</li>
+            <li>Developed the <strong>"SVNET"</strong> system — a comprehensive platform for supply chain management, approvals, supplier tracking, and monitoring.</li>
+            <li>Engineered and maintained large-scale internal tools streamlining business processes across departments.</li>
+          </ul>
+          <div style="margin-top:.75rem;display:flex;gap:.5rem;flex-wrap:wrap">
+            <span class="tag">ASP.NET C#</span><span class="tag">SQL Server</span><span class="tag">NGINX</span><span class="tag">Ubuntu Server</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gold Gym -->
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:var(--accent3);box-shadow:0 0 0 3px rgba(6,182,212,.3)"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-company">Gold Gym (PT Fit and Health Indonesia) · Jakarta</div>
+              <div class="exp-role">IT Supervisor</div>
+            </div>
+            <div class="exp-period">Jan 2020 – Aug 2020</div>
+          </div>
+          <ul class="exp-desc">
+            <li>Created and deployed internal web application for event management and gym record access.</li>
+            <li>Managed IT infrastructure and ensured system reliability across gym branches.</li>
+          </ul>
+          <div style="margin-top:.75rem;display:flex;gap:.5rem;flex-wrap:wrap">
+            <span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">Bootstrap</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Indomaret -->
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:var(--green);box-shadow:0 0 0 3px rgba(16,185,129,.3)"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-company">Klik Indomaret (PT Indomarco Prismatama) · Jakarta</div>
+              <div class="exp-role">Web Developer (C#)</div>
+            </div>
+            <div class="exp-period">Oct 2018 – Dec 2019</div>
+          </div>
+          <ul class="exp-desc">
+            <li>Maintained and developed KlikIndomaret across multiple modules: CMS, Virtual Product, and Payment Center.</li>
+            <li>Enhanced the CMS platform to support growing e-commerce operations and product catalog management.</li>
+          </ul>
+          <div style="margin-top:.75rem;display:flex;gap:.5rem;flex-wrap:wrap">
+            <span class="tag">ASP.NET C#</span><span class="tag">SQL Server</span><span class="tag">jQuery</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AGIT -->
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:var(--orange);box-shadow:0 0 0 3px rgba(245,158,11,.3)"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-company">AGIT (PT Astra Graphia Information Technology) · Jakarta</div>
+              <div class="exp-role">Web Developer (C#)</div>
+            </div>
+            <div class="exp-period">Aug 2018 – Sep 2019</div>
+          </div>
+          <ul class="exp-desc">
+            <li>Built a warehousing application for <strong>PT Toyota Astra Motor</strong> — managing inventory, logistics, and warehouse operations.</li>
+            <li>Developed a sales and marketing system for <strong>PT Isuzu Astra Motor Indonesia</strong> (<a href="https://sdanew.isuzu.astra.co.id/" target="_blank" style="color:var(--accent)">sdanew.isuzu.astra.co.id</a>).</li>
+          </ul>
+          <div style="margin-top:.75rem;display:flex;gap:.5rem;flex-wrap:wrap">
+            <span class="tag">ASP.NET C#</span><span class="tag">SQL Server</span><span class="tag">Bootstrap</span><span class="tag">jQuery</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ── -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label">// selected projects</div>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+    <div class="projects-grid">
+
+      <!-- BA Projects: RM & PM Selection -->
+      <div class="project-card" style="border-color:rgba(16,185,129,.25);grid-column:1/-1">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),var(--accent3),var(--accent));border-radius:var(--radius) var(--radius) 0 0"></div>
+        <div class="project-header">
+          <div class="project-icon" style="background:rgba(16,185,129,.15);color:var(--green)">
+            <i class="fas fa-microscope"></i>
+          </div>
+          <div class="project-company-badge" style="background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.3);color:var(--green)">
+            Kalbe Nutritionals · IDC System
+          </div>
+          <div class="project-company-badge" style="background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.3);color:var(--orange)">
+            ✦ Business Analyst Role
+          </div>
+        </div>
+        <h3 class="project-title">RMPM — Raw Material &amp; Packaging Material Selection System</h3>
+        <p class="project-desc">
+          A comprehensive digital system for managing the full lifecycle of Raw Material (RM) and Packaging Material (PM) selection at Kalbe Nutritionals. As Business Analyst, I designed the end-to-end business flow, created BRD &amp; FSD documentation, and built interactive HTML prototypes used as the blueprint for development. The system covers material evaluation, item specification management, and packaging compliance — replacing manual and fragmented processes across R&amp;D, Quality, and Procurement teams.
+        </p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.75rem;margin:.25rem 0">
+
+          <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem">
+            <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem">
+              <i class="fas fa-flask" style="color:var(--green);margin-right:.3rem"></i> RM Selection — Sample Management
+            </div>
+            <div style="font-size:.82rem;color:var(--light);line-height:1.8">
+              4-step wizard workflow: Document Registration → Document Sample → Evaluation → Disposition. Captures supplier info, halal category, GMO status, organic status, EG-DEG content, storage condition, and multi-category test parameters (Organoleptic, Nutrition, Microbiological, Heavy Metals, Pesticides, Antibiotics, Mycotoxin). Disposition step allows type change with audit trail.
+            </div>
+          </div>
+
+          <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem">
+            <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem">
+              <i class="fas fa-file-alt" style="color:var(--accent);margin-right:.3rem"></i> Item Spec (RM &amp; PM)
+            </div>
+            <div style="font-size:.82rem;color:var(--light);line-height:1.8">
+              Official quality standard document for each material. Role-based editing: PDV manages material description &amp; allergens, QA/QS manages microbiological &amp; contaminant parameters. Supports "Copy From" reference (Oracle or RM Evaluation). Status flow: Draft → Waiting Approval → Approved → Registered in ERP. Integrated with Oracle Inventory as master data.
+            </div>
+          </div>
+
+          <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem">
+            <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem">
+              <i class="fas fa-box" style="color:var(--accent2);margin-right:.3rem"></i> Packforces SEAL — PM Selection
+            </div>
+            <div style="font-size:.82rem;color:var(--light);line-height:1.8">
+              The most complete BA project. SEAL (Supplier Evaluation &amp; Approval for Labeling) manages packaging material selection per project. Features: dashboard with status cards (Draft/Submitted/Completed), "My Pending Task" view, multi-PIC assignment per department, document upload with OR-upload + AND-approval logic, timeline audit trail per document, and reference to Item Spec or PM Evaluation.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- BA Deliverables highlight -->
+        <div style="background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.2);border-radius:8px;padding:1rem 1.25rem;display:flex;gap:.75rem;align-items:flex-start">
+          <i class="fas fa-star" style="color:var(--orange);margin-top:.15rem;flex-shrink:0"></i>
+          <div style="font-size:.85rem;color:var(--light);line-height:1.8">
+            <strong style="color:var(--text)">BA Deliverables:</strong> Business Requirements Document (BRD), Functional Specification Document (FSD), role &amp; access matrix per department (PDV, QA/QS, Pack Dev, Regulatory Affairs, Business Dev), business flow diagrams, and fully interactive HTML prototypes — used directly as reference by the development team.
+          </div>
+        </div>
+
+        <div class="project-role">
+          <i class="fas fa-user-tag"></i>
+          <span>Role: <strong>Business Analyst &amp; Developer</strong> — Conducted stakeholder interviews across R&amp;D, Quality, and Procurement. Defined business flows, wrote BRD &amp; FSD, designed role-based access rules, and built all HTML prototypes from scratch as the development blueprint.</span>
+        </div>
+        <div class="project-tags">
+          <span class="tag">Business Analysis</span>
+          <span class="tag">BRD / FSD</span>
+          <span class="tag">HTML Prototype</span>
+          <span class="tag">Role-Based Access</span>
+          <span class="tag">Approval Workflow</span>
+          <span class="tag">Bootstrap 5</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">ERP Integration Design</span>
+        </div>
+        <div class="project-footer">
+          <span class="project-year"><i class="fas fa-calendar-alt"></i> 2026 – Present</span>
+          <span class="project-type internal"><i class="fas fa-lock"></i> Internal · Kalbe Nutritionals IDC System</span>
+        </div>
+      </div>
+
+      <!-- Analytical Central -->
+      <div class="project-card" style="border-color:rgba(59,130,246,.25);grid-column:1/-1">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));border-radius:var(--radius) var(--radius) 0 0"></div>
+        <div class="project-header">
+          <div class="project-icon" style="background:rgba(59,130,246,.15);color:var(--accent)">
+            <i class="fas fa-flask"></i>
+          </div>
+          <div class="project-company-badge" style="background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.3);color:var(--accent)">
+            Kalbe Nutritionals (PT. Sanghiang Perkasa)
+          </div>
+          <div class="project-company-badge" style="background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.3);color:var(--green)">
+            ✦ Featured Project
+          </div>
+        </div>
+        <h3 class="project-title">Analytical Central — Laboratory Analysis Request &amp; Reporting System</h3>
+        <p class="project-desc">
+          A full-featured enterprise web platform for Kalbe Nutritionals' Quality &amp; Laboratory division. The system manages end-to-end laboratory analysis workflows — from sample submission and analysis request tracking, to Certificate of Analysis (CoA) report generation and approval. Integrated with internal ERP systems and a centralized API gateway for user authentication and cross-system data synchronization.
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin:.25rem 0">
+          <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem">
+            <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:.4rem">Core Modules</div>
+            <div style="font-size:.82rem;color:var(--light);line-height:1.7">
+              Analysis Request (CRUD + Approval Flow)<br/>
+              Sample &amp; Parameter Management<br/>
+              Certificate of Analysis (CoA) Report<br/>
+              PDF Export (wkhtmltopdf)<br/>
+              CMS — Article, News, Catalogue, Gallery
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem">
+            <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:.4rem">Architecture</div>
+            <div style="font-size:.82rem;color:var(--light);line-height:1.7">
+              Clean N-Layer: Web · Services · DAL · Common<br/>
+              Multi-DB: PostgreSQL + Oracle + SQL Server<br/>
+              Redis Cache &amp; Session Management<br/>
+              Role-Based Access Control (RBAC)<br/>
+              CSRF Protection + Anti-XSS + CSP Headers
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem">
+            <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:.4rem">Integrations</div>
+            <div style="font-size:.82rem;color:var(--light);line-height:1.7">
+              ERP System Integration<br/>
+              Centralized API Gateway (Auth)<br/>
+              Email Notification (SMTP)<br/>
+              Swagger / OpenAPI (versioned)<br/>
+              Docker + Jenkins CI/CD + Octopus Deploy
+            </div>
+          </div>
+        </div>
+        <div class="project-role">
+          <i class="fas fa-user-tag"></i>
+          <span>Role: <strong>Web Developer Supervisor &amp; IT Developer Leader</strong> — Architected the full solution from scratch. Led development of all modules, designed the multi-database strategy, implemented security hardening (RBAC, CSRF, CSP, Anti-XSS), integrated with internal ERP and authentication systems, and managed CI/CD pipeline via Jenkins &amp; Octopus Deploy on Ubuntu Server with Docker.</span>
+        </div>
+        <div class="project-tags">
+          <span class="tag">.NET Core (C#)</span>
+          <span class="tag">ASP.NET MVC</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Oracle DB</span>
+          <span class="tag">SQL Server</span>
+          <span class="tag">Redis</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Jenkins</span>
+          <span class="tag">Octopus Deploy</span>
+          <span class="tag">Swagger / OpenAPI</span>
+          <span class="tag">Ubuntu Server</span>
+        </div>
+        <div class="project-footer">
+          <span class="project-year"><i class="fas fa-calendar-alt"></i> 2024 – 2025</span>
+          <span class="project-type internal"><i class="fas fa-lock"></i> Internal Enterprise System · analyticalcenter.id</span>
+        </div>
+      </div>
+
+      <!-- SVNET -->
+      <div class="project-card" style="border-color:rgba(139,92,246,.25);grid-column:1/-1">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent2),var(--accent),var(--accent3));border-radius:var(--radius) var(--radius) 0 0"></div>
+        <div class="project-header">
+          <div class="project-icon" style="background:rgba(139,92,246,.15);color:var(--accent2)">
+            <i class="fas fa-network-wired"></i>
+          </div>
+          <div class="project-company-badge" style="background:rgba(139,92,246,.1);border-color:rgba(139,92,246,.3);color:var(--accent2)">
+            Kalbe Nutritionals (PT. Sanghiang Perkasa)
+          </div>
+          <div class="project-company-badge" style="background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.3);color:var(--accent)">
+            ✦ Multi-Module Platform
+          </div>
+        </div>
+        <h3 class="project-title">SVNET — Supplier &amp; Supply Chain Web Platform</h3>
+        <p class="project-desc">
+          An enterprise B2B web platform for Kalbe Nutritionals' Supply Chain division, connecting internal procurement teams with external suppliers. SVNET covers the full supplier lifecycle — from onboarding and registration to procurement notifications, online pitching, and supply chain monitoring. Built on ASP.NET MVC with SQL Server, the platform serves hundreds of suppliers and internal users across multiple business units.
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.75rem;margin:.25rem 0">
+
+          <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem">
+            <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem">
+              <i class="fas fa-database" style="color:var(--accent2);margin-right:.3rem"></i> SDB — Supplier Database
+            </div>
+            <div style="font-size:.82rem;color:var(--light);line-height:1.8">
+              Supplier self-registration portal with multi-category support (Direct, Indirect, Packaging Material, Principal). Captures full company profile — address, LOB, currency, employee count, turnover, and contact persons. Role-based access distinguishes internal reviewers from external supplier users.
+            </div>
+          </div>
+
+          <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem">
+            <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem">
+              <i class="fas fa-bell" style="color:var(--orange);margin-right:.3rem"></i> FPP / FKP — Supply Notifications
+            </div>
+            <div style="font-size:.82rem;color:var(--light);line-height:1.8">
+              Procurement notification system for managing PO-based supply commitments. FPP (supplier-initiated) and FKP (internal-initiated) handle shipment scheduling, quantity balancing, delivery date changes, and multi-tier approval with reject/reason tracking. Includes countdown timer and read/unread status per document.
+            </div>
+          </div>
+
+          <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem">
+            <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem">
+              <i class="fas fa-gavel" style="color:var(--accent3);margin-right:.3rem"></i> OPI — Online Pitching
+            </div>
+            <div style="font-size:.82rem;color:var(--light);line-height:1.8">
+              Digital pitching platform where internal teams submit project requests (items, specs, budget, deadlines) and invite registered suppliers to respond. Supports multi-item per project, file attachments, supplier selection, LOB assignment, and a full approval workflow from Draft to Submit.
+            </div>
+          </div>
+
+        </div>
+        <div class="project-role">
+          <i class="fas fa-user-tag"></i>
+          <span>Role: <strong>Web Developer (C#, ASP.NET) IT Supervisor</strong> — Developed and maintained all three modules end-to-end. Responsible for feature development, bug fixing, UI enhancements, database design, and deployment on the production environment.</span>
+        </div>
+        <div class="project-tags">
+          <span class="tag">ASP.NET MVC (C#)</span>
+          <span class="tag">SQL Server</span>
+          <span class="tag">jQuery</span>
+          <span class="tag">Bootstrap</span>
+          <span class="tag">DataTables</span>
+          <span class="tag">NGINX</span>
+          <span class="tag">Ubuntu Server</span>
+        </div>
+        <div class="project-footer">
+          <span class="project-year"><i class="fas fa-calendar-alt"></i> 2020 – 2023</span>
+          <span class="project-type internal"><i class="fas fa-lock"></i> Internal Enterprise Platform</span>
+        </div>
+      </div>
+
+      <!-- Toyota Warehousing -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-icon" style="background:rgba(59,130,246,.12);color:var(--accent)">
+            <i class="fas fa-warehouse"></i>
+          </div>
+          <div class="project-company-badge" style="background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.25);color:var(--accent)">
+            AGIT · PT Toyota Astra Motor
+          </div>
+        </div>
+        <h3 class="project-title">Warehousing Management System</h3>
+        <p class="project-desc">
+          Enterprise warehousing application built for PT Toyota Astra Motor to manage inventory, inbound/outbound logistics, stock tracking, and warehouse operations across multiple locations. The system replaced manual processes and improved operational efficiency for the warehouse team.
+        </p>
+        <div class="project-role">
+          <i class="fas fa-user-tag"></i>
+          <span>Role: <strong>Web Developer (C#)</strong> — Full development of modules from scratch, database design, and deployment.</span>
+        </div>
+        <div class="project-tags">
+          <span class="tag">ASP.NET C#</span><span class="tag">SQL Server</span><span class="tag">Bootstrap</span><span class="tag">jQuery</span><span class="tag">RESTful API</span>
+        </div>
+        <div class="project-footer">
+          <span class="project-year"><i class="fas fa-calendar-alt"></i> 2018 – 2019</span>
+          <span class="project-type internal"><i class="fas fa-lock"></i> Internal System</span>
+        </div>
+      </div>
+
+      <!-- Isuzu SDA -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-icon" style="background:rgba(245,158,11,.12);color:var(--orange)">
+            <i class="fas fa-car"></i>
+          </div>
+          <div class="project-company-badge" style="background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.25);color:var(--orange)">
+            AGIT · PT Isuzu Astra Motor Indonesia
+          </div>
+        </div>
+        <h3 class="project-title">Sales &amp; Marketing System — SDA</h3>
+        <p class="project-desc">
+          A web-based sales and marketing platform for PT Isuzu Astra Motor Indonesia, enabling the sales team to manage dealer data, track sales performance, monitor marketing campaigns, and generate reports. Streamlined the sales pipeline and improved visibility across the distribution network.
+        </p>
+        <div class="project-role">
+          <i class="fas fa-user-tag"></i>
+          <span>Role: <strong>Web Developer (C#)</strong> — End-to-end development, API integration, and production deployment.</span>
+        </div>
+        <div class="project-tags">
+          <span class="tag">ASP.NET C#</span><span class="tag">SQL Server</span><span class="tag">Bootstrap</span><span class="tag">jQuery</span>
+        </div>
+        <div class="project-footer">
+          <span class="project-year"><i class="fas fa-calendar-alt"></i> 2018 – 2019</span>
+          <a href="https://sdanew.isuzu.astra.co.id/" target="_blank" class="project-link">
+            <i class="fas fa-external-link-alt"></i> Live Site
+          </a>
+        </div>
+      </div>
+
+      <!-- KlikIndomaret -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-icon" style="background:rgba(16,185,129,.12);color:var(--green)">
+            <i class="fas fa-shopping-cart"></i>
+          </div>
+          <div class="project-company-badge" style="background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.25);color:var(--green)">
+            PT Indomarco Prismatama
+          </div>
+        </div>
+        <h3 class="project-title">KlikIndomaret — E-Commerce Platform</h3>
+        <p class="project-desc">
+          Maintained and developed multiple modules of KlikIndomaret, one of Indonesia's largest retail e-commerce platforms. Worked across CMS for product &amp; promo management, Virtual Product module for digital goods (pulsa, token listrik, game vouchers), and Payment Center for multi-channel payment processing.
+        </p>
+        <div class="project-role">
+          <i class="fas fa-user-tag"></i>
+          <span>Role: <strong>Web Developer (C#)</strong> — Feature development, bug fixing, module enhancement, and CMS maintenance.</span>
+        </div>
+        <div class="project-tags">
+          <span class="tag">ASP.NET C#</span><span class="tag">SQL Server</span><span class="tag">CMS</span><span class="tag">Payment Gateway</span><span class="tag">jQuery</span>
+        </div>
+        <div class="project-footer">
+          <span class="project-year"><i class="fas fa-calendar-alt"></i> 2018 – 2019</span>
+          <span class="project-type internal"><i class="fas fa-lock"></i> Internal Platform</span>
+        </div>
+      </div>
+
+      <!-- Gold's Gym -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-icon" style="background:rgba(139,92,246,.12);color:var(--accent2)">
+            <i class="fas fa-dumbbell"></i>
+          </div>
+          <div class="project-company-badge" style="background:rgba(139,92,246,.1);border-color:rgba(139,92,246,.25);color:var(--accent2)">
+            PT Fit and Health Indonesia · Gold's Gym
+          </div>
+        </div>
+        <h3 class="project-title">Internal Web App — Event &amp; Member Management</h3>
+        <p class="project-desc">
+          Designed and deployed an internal web application for Gold's Gym to manage gym events, member records, and branch-level data access. Centralized member information and event scheduling, replacing spreadsheet-based workflows and improving operational efficiency across gym branches.
+        </p>
+        <div class="project-role">
+          <i class="fas fa-user-tag"></i>
+          <span>Role: <strong>IT Supervisor</strong> — Full ownership from requirements gathering, development, deployment, to IT infrastructure management.</span>
+        </div>
+        <div class="project-tags">
+          <span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">Bootstrap</span><span class="tag">jQuery</span>
+        </div>
+        <div class="project-footer">
+          <span class="project-year"><i class="fas fa-calendar-alt"></i> 2020</span>
+          <span class="project-type internal"><i class="fas fa-lock"></i> Internal System</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── ACHIEVEMENTS ── -->
+<section id="achievements">
+  <div class="container">
+    <div class="section-label">// key achievements</div>
+    <h2 class="section-title">What I've Delivered</h2>
+    <div class="section-line"></div>
+    <div class="achievements-grid">
+      <div class="achievement-card">
+        <div class="achievement-num">500+</div>
+        <div class="achievement-text">
+          Led the <strong>end-to-end development and deployment</strong> of a Manufacture and Laboratory web system actively used by over 500 employees every week at Kalbe Nutritionals.
+        </div>
+      </div>
+      <div class="achievement-card">
+        <div class="achievement-num">SVNET</div>
+        <div class="achievement-text">
+          Engineered and maintained <strong>SVNET</strong> — a large-scale internal platform for supply chain management, approvals, supplier tracking, and real-time monitoring, streamlining core business processes.
+        </div>
+      </div>
+      <div class="achievement-card">
+        <div class="achievement-num">Kalbe Tools</div>
+        <div class="achievement-text">
+          Built and maintained <strong>Kalbe enterprise tools</strong> — web dashboards and reporting systems that improved data visibility and empowered stakeholders to make faster, data-driven decisions.
+        </div>
+      </div>
+      <div class="achievement-card">
+        <div class="achievement-num">Astra</div>
+        <div class="achievement-text">
+          Delivered production-grade systems for <strong>Toyota Astra Motor</strong> (warehousing) and <strong>Isuzu Astra Motor Indonesia</strong> (sales & marketing platform), serving thousands of users.
+        </div>
+      </div>
+      <div class="achievement-card">
+        <div class="achievement-num">7 Yrs</div>
+        <div class="achievement-text">
+          Consistently promoted from developer to <strong>IT Supervisor</strong> and then <strong>Developer Leader</strong>, demonstrating technical excellence and leadership across multiple organizations.
+        </div>
+      </div>
+      <div class="achievement-card">
+        <div class="achievement-num">Multi-Industry</div>
+        <div class="achievement-text">
+          Successfully delivered solutions across <strong>5+ industries</strong>: Manufacturing, Healthcare, E-Commerce, Fitness, and Automotive — adapting to diverse business domains and technical requirements.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EDUCATION ── -->
+<section id="education">
+  <div class="container">
+    <div class="section-label">// education</div>
+    <h2 class="section-title">Academic Background</h2>
+    <div class="section-line"></div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div style="font-size:2rem;margin-bottom:.75rem">🎓</div>
+        <div class="edu-degree">Bachelor of Computer Science</div>
+        <div class="edu-school">Bina Nusantara University · Jakarta</div>
+        <div class="edu-meta">
+          <span class="edu-badge">GPA 3.1 / 4.00</span>
+          <span class="edu-badge">Aug 2018 – Jan 2020</span>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div style="font-size:2rem;margin-bottom:.75rem">📚</div>
+        <div class="edu-degree">Diploma in Information Technology</div>
+        <div class="edu-school">Astra Tech · Jakarta</div>
+        <div class="edu-meta">
+          <span class="edu-badge">GPA 3.1 / 4.00</span>
+          <span class="edu-badge">Aug 2014 – Dec 2017</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label">// get in touch</div>
+    <h2 class="section-title">Let's Work Together</h2>
+    <div class="section-line"></div>
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <h3>Open to new opportunities</h3>
+        <p>
+          Whether you have a project in mind, want to discuss a role, or just want to connect — my inbox is always open. I'll get back to you as soon as possible.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:agengkurniawan1@gmail.com" class="contact-link">
+            <i class="fas fa-envelope"></i>
+            agengkurniawan1@gmail.com
+          </a>
+          <a href="#" class="contact-link">
+            <i class="fas fa-map-marker-alt"></i>
+            Jakarta, Indonesia
+          </a>
+          <a href="https://www.linkedin.com/in/ageng-kurniawan-sugianto-463687179/" target="_blank" class="contact-link">
+            <i class="fab fa-linkedin"></i>
+            linkedin.com/in/ageng-kurniawan-sugianto
+          </a>
+          <a href="https://github.com/Agengkurnia" target="_blank" class="contact-link">
+            <i class="fab fa-github"></i>
+            github.com/Agengkurnia
+          </a>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="John Doe" required/>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="john@example.com" required/>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Tell me about your project or opportunity..." required></textarea>
+        </div>
+        <button type="submit" class="btn-send">
+          <i class="fas fa-paper-plane"></i> &nbsp;Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>Designed &amp; Built by <span>Ageng Kurniawan Sugianto</span> · Jakarta, Indonesia · 2025</p>
+  <p style="margin-top:.4rem;font-size:.75rem">Full Stack Developer · ASP.NET · PHP · Docker · DevOps</p>
+</footer>
+
+<script>
+  // Typing animation
+  const titles = [
+    'Full Stack Developer',
+    'Business Analyst & Developer',
+    'IT Supervisor & Leader',
+    'ASP.NET / C# Engineer',
+    'PHP / Laravel Developer',
+    'DevOps Enthusiast'
+  ];
+  let ti = 0, ci = 0, deleting = false;
+  const el = document.querySelector('.hero-title');
+
+  function type() {
+    const current = titles[ti];
+    if (!deleting) {
+      el.innerHTML = '&gt; ' + current.slice(0, ci + 1) + '<span class="cursor">_</span>';
+      ci++;
+      if (ci === current.length) { deleting = true; setTimeout(type, 2000); return; }
+    } else {
+      el.innerHTML = '&gt; ' + current.slice(0, ci - 1) + '<span class="cursor">_</span>';
+      ci--;
+      if (ci === 0) { deleting = false; ti = (ti + 1) % titles.length; }
+    }
+    setTimeout(type, deleting ? 60 : 100);
+  }
+  type();
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.skill-card, .exp-card, .achievement-card, .edu-card, .highlight-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    observer.observe(el);
+  });
+
+  // Contact form
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-send');
+    btn.innerHTML = '<i class="fas fa-check"></i> &nbsp;Message Sent!';
+    btn.style.background = 'var(--green)';
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> &nbsp;Send Message';
+      btn.style.background = '';
+      e.target.reset();
+    }, 3000);
+  }
+
+  // Active nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id');
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+    });
+  });
+</script>
+</body>
+</html>
