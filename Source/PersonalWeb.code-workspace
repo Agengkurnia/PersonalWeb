@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../../../FSD Generator Engine"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "PersonalWeb"
+	}
+}
