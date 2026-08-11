@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ageng Kurniawan Sugianto — Business Analyst & Full-Stack Developer</title>
   <meta name="description" content="Business Analyst and Full-Stack Developer based in Jakarta. Enterprise web systems, prototypes, and Functional Specification Documents."/>
+  <meta name="theme-color" content="#1E3A5F"/>
+  <meta property="og:title" content="Ageng Kurniawan Sugianto — Business Analyst & Full-Stack Developer"/>
+  <meta property="og:description" content="Requirements, interactive prototypes, and FSD delivery for enterprise systems."/>
+  <meta property="og:url" content="https://agengsugianto.vercel.app/"/>
+  <meta property="og:type" content="website"/>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231E3A5F'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Georgia,serif' font-size='28' fill='white'%3EAK%3C/text%3E%3C/svg%3E"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -14,8 +20,8 @@
       --bg: #F7F8FA;
       --surface: #FFFFFF;
       --ink: #1B2430;
-      --muted: #5B6573;
-      --line: #E3E7EE;
+      --muted: #3F4A5A;
+      --line: #D7DDE6;
       --navy: #1E3A5F;
       --navy-deep: #152A45;
       --navy-soft: #E8EEF5;
@@ -99,8 +105,20 @@
     .nav-toggle {
       display: none;
       border: 1px solid var(--line); background: var(--surface);
-      width: 2.5rem; height: 2.5rem; border-radius: var(--radius);
+      width: 2.75rem; height: 2.75rem; border-radius: var(--radius);
       cursor: pointer; align-items: center; justify-content: center;
+    }
+    .nav-links a.is-active { color: var(--navy); }
+    .method-visual {
+      margin-bottom: 1.25rem;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(180deg, #FBFCFD, #F3F6FA);
+    }
+    .method-visual svg { width: 100%; height: auto; display: block; }
+    .method-caption {
+      margin-top: .65rem; font-size: .78rem; color: var(--muted); text-align: center;
     }
     .nav-toggle span {
       display: block; width: 1.1rem; height: 2px; background: var(--ink);
@@ -395,7 +413,26 @@
             <a class="btn btn-secondary" href="#contact">Contact</a>
           </div>
         </div>
-        <aside class="hero-aside" aria-label="Profile highlights">
+        <aside class="hero-aside" aria-label="Working method and profile highlights">
+          <div class="method-visual" aria-hidden="true">
+            <svg viewBox="0 0 360 120" role="img" aria-label="BA method: Discover, Prototype, Specify, Deliver">
+              <rect x="8" y="28" width="72" height="44" rx="6" fill="#1E3A5F"/>
+              <text x="44" y="55" text-anchor="middle" fill="#fff" font-size="11" font-family="Segoe UI,sans-serif">Discover</text>
+              <path d="M86 50 H108" stroke="#1E3A5F" stroke-width="2"/>
+              <polygon points="108,46 118,50 108,54" fill="#1E3A5F"/>
+              <rect x="122" y="28" width="72" height="44" rx="6" fill="#fff" stroke="#1E3A5F" stroke-width="2"/>
+              <text x="158" y="55" text-anchor="middle" fill="#1E3A5F" font-size="11" font-family="Segoe UI,sans-serif">Prototype</text>
+              <path d="M200 50 H222" stroke="#1E3A5F" stroke-width="2"/>
+              <polygon points="222,46 232,50 222,54" fill="#1E3A5F"/>
+              <rect x="236" y="28" width="72" height="44" rx="6" fill="#fff" stroke="#1E3A5F" stroke-width="2"/>
+              <text x="272" y="55" text-anchor="middle" fill="#1E3A5F" font-size="11" font-family="Segoe UI,sans-serif">FSD / BRD</text>
+              <path d="M314 50 H328" stroke="#1E3A5F" stroke-width="2"/>
+              <polygon points="328,46 338,50 328,54" fill="#1E3A5F"/>
+              <circle cx="348" cy="50" r="6" fill="#1E3A5F"/>
+              <text x="180" y="100" text-anchor="middle" fill="#3F4A5A" font-size="10" font-family="Segoe UI,sans-serif">Stakeholder-validated delivery loop</text>
+            </svg>
+            <p class="method-caption">How I work: discover needs → prototype flows → specify in FSD → support delivery</p>
+          </div>
           <h2>At a glance</h2>
           <ul class="fact-list">
             <li><span class="fact-k">Experience</span><span class="fact-v">9+ years in web &amp; enterprise systems</span></li>
@@ -428,10 +465,22 @@
             </p>
           </div>
           <ul class="about-points">
-            <li><strong>Analysis &amp; documentation</strong>Requirements, BRD/FSD, process mapping, stakeholder alignment</li>
-            <li><strong>Prototype to delivery</strong>Interactive HTML prototypes used as blueprints for development</li>
-            <li><strong>Leadership</strong>Prior roles as IT Supervisor and Developer Leader for cross-functional teams</li>
-            <li><strong>Platforms</strong>ASP.NET / C#, PHP, multi-database, Docker, and CI/CD practices</li>
+            <li>
+              <strong>Analysis &amp; documentation</strong>
+              Requirements, BRD/FSD, process mapping, stakeholder alignment
+            </li>
+            <li>
+              <strong>Prototype to delivery</strong>
+              Interactive HTML prototypes used as blueprints for development
+            </li>
+            <li>
+              <strong>Leadership</strong>
+              Prior roles as IT Supervisor and Developer Leader for cross-functional teams
+            </li>
+            <li>
+              <strong>Platforms</strong>
+              ASP.NET / C#, PHP, multi-database, Docker, and CI/CD practices
+            </li>
           </ul>
         </div>
       </div>
@@ -451,6 +500,7 @@
             <tr><th scope="row">Backend</th><td>ASP.NET (C#), .NET Core, PHP, Laravel, CodeIgniter, RESTful API</td></tr>
             <tr><th scope="row">Database</th><td>MySQL, PostgreSQL, SQL Server, Oracle</td></tr>
             <tr><th scope="row">Infrastructure</th><td>Ubuntu Server, Docker, NGINX, Apache, Jenkins, Octopus</td></tr>
+            <tr><th scope="row">Tools &amp; AI</th><td>Git, Notion, Cursor, Antigravity, Kiro, Claude, Copilot, Gemini</td></tr>
             <tr><th scope="row">Languages</th><td>Bahasa Indonesia (Native), English (Professional working)</td></tr>
           </tbody>
         </table>
@@ -473,6 +523,8 @@
               <ul>
                 <li>Gather requirements and produce BRD/system specifications that connect business needs to delivery.</li>
                 <li>Build interactive prototypes and Functional Specification Documents (FSD) for stakeholder alignment.</li>
+                <li>Delivered Man Power GT (Falcon FPRS) web + mobile SFA prototype to validate General Trade field workflows.</li>
+                <li>Built an FSD Generator Engine that standardizes FSD production from UI and requirements into Word deliverables.</li>
               </ul>
             </div>
           </article>
@@ -512,7 +564,7 @@
             <div class="exp-when">Oct 2018 – Dec 2019</div>
             <div>
               <h3 class="exp-role">Web Developer (C#)</h3>
-              <p class="exp-company">Klik Indomaret (PT Indomarco Prismatama) · Jakarta</p>
+              <p class="exp-company">Klik Indomaret (PT Indomarco Prismatama) · Jakarta · concurrent with AGIT assignment</p>
               <ul>
                 <li>Developed and maintained CMS, Virtual Product, and Payment Center modules.</li>
               </ul>
@@ -522,7 +574,7 @@
             <div class="exp-when">Aug 2018 – Sep 2019</div>
             <div>
               <h3 class="exp-role">Web Developer (C#)</h3>
-              <p class="exp-company">AGIT (PT Astra Graphia Information Technology) · Jakarta</p>
+              <p class="exp-company">AGIT (PT Astra Graphia Information Technology) · Jakarta · project assignment</p>
               <ul>
                 <li>Built warehousing for PT Toyota Astra Motor and a sales platform for PT Isuzu Astra Motor Indonesia.</li>
               </ul>
@@ -556,6 +608,24 @@
               <span class="chip">HTML prototype</span>
               <span class="chip">Web + Mobile SFA</span>
               <span class="chip">FSD alignment</span>
+            </div>
+          </article>
+          <article class="project">
+            <div class="project-meta">
+              <span class="tag-pill">Business analysis</span>
+              <span>Kalbe Nutritionals · FSD Generator Engine · 2026</span>
+            </div>
+            <h3>FSD Generator Engine — Spec-to-Document Pipeline</h3>
+            <p>
+              Documentation toolkit that turns Markdown specifications, screenshots, and diagrams into Kalbe-branded
+              Functional Specification Documents (FSD). Encodes BA writing standards (UI truth → BRD/FSD → Word deliverable)
+              so stakeholder packs stay consistent, regenerable, and aligned with live prototypes.
+            </p>
+            <div class="project-tags">
+              <span class="chip">FSD / BRD</span>
+              <span class="chip">Documentation standards</span>
+              <span class="chip">Markdown → DOCX</span>
+              <span class="chip">Stakeholder deliverables</span>
             </div>
           </article>
           <article class="project">
@@ -680,7 +750,9 @@
             <li><a href="mailto:agengkurniawan1@gmail.com">Email <span>agengkurniawan1@gmail.com</span></a></li>
             <li><a href="https://www.linkedin.com/in/ageng-kurniawan-sugianto-463687179/" target="_blank" rel="noopener">LinkedIn <span>ageng-kurniawan-sugianto</span></a></li>
             <li><a href="https://github.com/Agengkurnia" target="_blank" rel="noopener">GitHub <span>Agengkurnia</span></a></li>
+            <li><a href="https://agengsugianto.vercel.app/" target="_blank" rel="noopener">Website <span>agengsugianto.vercel.app</span></a></li>
             <li><a href="Document/Output/CV%20-%20Ageng%20Kurniawan%20Sugianto.pdf" download="CV - Ageng Kurniawan Sugianto.pdf">CV <span>Download PDF</span></a></li>
+            <li><span style="font-weight:600;color:var(--ink)">Location <span style="color:var(--muted);font-weight:500;font-size:.92rem">Jakarta, Indonesia</span></span></li>
           </ul>
         </div>
         <form class="contact-form" id="contact-form">
@@ -713,18 +785,42 @@
   <script>
     const toggle = document.querySelector('.nav-toggle');
     const links = document.querySelector('#site-nav');
+    const navAnchors = [...document.querySelectorAll('#site-nav a[href^="#"]')];
+
     toggle?.addEventListener('click', () => {
       const open = links.classList.toggle('open');
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     });
-    links?.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        links.classList.remove('open');
-        toggle?.setAttribute('aria-expanded', 'false');
-        toggle?.setAttribute('aria-label', 'Open menu');
-      });
+
+    const closeNav = () => {
+      links?.classList.remove('open');
+      toggle?.setAttribute('aria-expanded', 'false');
+      toggle?.setAttribute('aria-label', 'Open menu');
+    };
+
+    links?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeNav();
     });
+
+    const sectionIds = navAnchors.map(a => a.getAttribute('href').slice(1));
+    const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+    const setActive = () => {
+      let current = sectionIds[0];
+      const y = window.scrollY + 96;
+      sections.forEach(sec => {
+        if (sec.offsetTop <= y) current = sec.id;
+      });
+      navAnchors.forEach(a => {
+        const on = a.getAttribute('href') === '#' + current;
+        a.classList.toggle('is-active', on);
+        if (on) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
+      });
+    };
+    window.addEventListener('scroll', setActive, { passive: true });
+    setActive();
 
     document.getElementById('contact-form')?.addEventListener('submit', (e) => {
       e.preventDefault();
